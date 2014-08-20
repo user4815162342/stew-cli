@@ -1,11 +1,11 @@
 {
   "name": "stew-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Stew Tools CLI for nodejs",
   "main": "index.js",
   "bin": {
-		"stew": "./index.js"
-	},
+    "stew": "./index.js"
+  },
   "dependencies": {
     "path-extra": "~0.2",
     "shelljs": "~0.3",
