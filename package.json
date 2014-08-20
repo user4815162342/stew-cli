@@ -1,0 +1,23 @@
+{
+  "name": "stew-cli",
+  "version": "0.0.0",
+  "description": "Stew Tools CLI for nodejs",
+  "main": "index.js",
+  "bin": {
+		"stew": "./index.js"
+	},
+  "dependencies": {
+    "path-extra": "~0.2",
+    "shelljs": "~0.3",
+    "mkdirp": "~0.5",
+    "minimatch": "~1.0",
+    "opener": "~1.3",
+    "mime": "~1.2",
+    "stew-core": "user4815162342/stew-core"
+  },
+  "scripts": {
+    "test": "echo \"Testing not implemented yet\" && exit 1"
+  },
+  "author": "Neil M. Sheldon",
+  "license": "MIT"
+}
