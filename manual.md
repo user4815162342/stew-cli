@@ -141,7 +141,7 @@ to edit when the current working document is the root of the project.
 -   `pdoc`: Changes the current working doc to the previous one in document
     order.
 
--   `cdoc`: Changes the current working doc to the first child of the current
+-   `dndoc`: Changes the current working doc to the first child of the current
     doc.
 
 -   `updoc`: Changes the current working doc to the container of the current
