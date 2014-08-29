@@ -29,20 +29,41 @@ var os = require('os');
      }
  }
  
+ /**
+  * These are commands which work only from the command line.
+  * */
+ nonREPLCommands = {
+     "repl": function(project,private) {
+        var options = {};
+        if (project) {
+            options.project = project;
+        }
+        if (typeof private !== "undefined") {
+            options.private = engine.toBoolean(private);
+        }
+        require('./lib/repl').main(options);
+    }
+     
+ }
+ 
  var run = module.exports.run = function(args) {
      try {
-         var command = engine.loadCommand(args[0]);
-         var result = command.apply(null,args.slice(1));
-         if (result instanceof engine.AsynchronousCall) {
-             result.run(function(err,data) {
-                 if (err) {
-                     outputError(err);
-                 } else {
-                     outputResult(data);
-                 }
-             });
+         if (nonREPLCommands.hasOwnProperty(args[0])) {
+             nonREPLCommands[args[0]].apply(nonREPLCommands,args.slice(1));
          } else {
-             outputResult(result);
+             var command = engine.loadCommand(args[0]);
+             var result = command.apply(null,args.slice(1));
+             if (result instanceof engine.AsynchronousCall) {
+                 result.run(function(err,data) {
+                     if (err) {
+                         outputError(err);
+                     } else {
+                         outputResult(data);
+                     }
+                 });
+             } else {
+                 outputResult(result);
+             }
          }
      } catch (e) {
          outputError(e);
@@ -51,16 +72,9 @@ var os = require('os');
  
  
  if (!module.parent) {
-     if ((process.argv.length > 2) && (process.argv[2] !== "repl")) {
+     if (process.argv.length > 2) {
          run(process.argv.slice(2));
      } else {
-         var options = {};
-        if (process.argv[3]) {
-            options.project = process.argv[3];
-        }
-        if (process.argv[4]) {
-            options.private = engine.toBoolean(process.argv[4]);
-        }
-        require('./lib/repl').main(options);
+         run(["repl"]);
     }
  }

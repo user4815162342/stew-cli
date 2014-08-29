@@ -121,7 +121,7 @@ to edit when the current working document is the root of the project.
     RegExp or Glob, which will be used to find an actual document in the
     project, usually relative to the current working document
 
-### Interactive Mode-Only Commands:
+### Interactive-Only Commands:
 
 -   `close`: See the open command, below. This closes the current stew project.
 
@@ -157,9 +157,9 @@ to edit when the current working document is the root of the project.
     external process might have changed some of the property files. In
     single-command mode, the cache only lasts the lifetime of the command.
     
-### REPL Command:
+### Single Command Mode Only Commans.
 
-This command is only available in single-command mode, and is useful for
+This commands is only available in single-command mode, and is useful for
 setting up some options for the REPL environment with some additional 
 options.
 
