@@ -156,6 +156,19 @@ to edit when the current working document is the root of the project.
     this command to clear that cache on the current project, in cases where an
     external process might have changed some of the property files. In
     single-command mode, the cache only lasts the lifetime of the command.
+    
+### REPL Command:
+
+This command is only available in single-command mode, and is useful for
+setting up some options for the REPL environment with some additional 
+options.
+
+-    `repl [project [boolean]]`: If a project is specified, the repl will
+automatically open up that project instead of the one specified in settings.
+If the boolean value is specified as true, then the repl will open up in
+private mode. In private mode, the global settings will not be saved, which
+means projects opened in the repl will not be remembered. This is useful
+for using stew with sensitive documents.
 
 ### Stew Project Commands:
 
