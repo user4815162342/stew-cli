@@ -40,3 +40,20 @@ you'll find them right there.
 
 And, someday, if Stew isn't around, and you stumble upon your own project, you
 will probably still be able to go through it and see what's there.
+
+## Installation:
+
+Stew is not yet set up as an npm package. It is, however, installable with
+npm from the github repository. Just do this (`sudo` as desired):
+
+`npm -g install user4815162342/stew-cli`
+
+And "stew" will be available in your path.
+
+Note that `npm -g update` won't automatically update this (yet?). Instead,
+to make sure it's updated, just run the install again.
+
+You can check the current version of stew CLi with:
+
+`stew version`
+
