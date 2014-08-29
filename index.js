@@ -3,18 +3,6 @@ var os = require('os');
 
  
  /**
-  * TODO: I need to be able to open up different projects in different
-  *  cli nstances at once.
-  * Also need to be able to specify whether or where it saves state.
-  * -- Create a command which only works in single-mode to start up the repl optionally:
-  *    stew repl [project] [private]
-  *    * The project specifies a directory to open for repl, 
-  *    this will cause the global settings to be set to this as the
-  *    last opened project (NOTE: This is not a problem, see below)
-  *    * Private is a boolean, if true this will not set modify any global 
-  *    settings at all.
-  * 
-  * 
   * TODO: Finish implementing the unimplemented commands.
   * */
  var engine = require("./lib/engine");
