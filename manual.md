@@ -79,15 +79,18 @@ matched the pattern.
 Since Stew deals with file names in a slightly different way than the shell,
 this can cause problems. Many stew commands want *document* names, not the file
 names that are part of  the document. This means that, you have to be extra
-careful when using these in single-command mode.
+careful when using these in single-command mode. Generally, you probably
+want to quote these glob patterns to pass them correctly.
 
-In interactive command mode, these patterns are *not* automatically expanded.
-Instead, in order to make use of them, you need to use the glob function,
-described below, which will only work in commands which support such patterns.
-Most of these commands will also support RegExp objects as well, if you prefer
-that. However, RegExp objects are always matched relative to the root of the
-project, while the Glob objects will match relative to the current working
-document.
+Most stew commands do accept glob patterns where they require a document
+name. These are not automatically expanded into extra arguments, as they 
+are in a shell, but turned into arrays or a single file as necessary by
+the command. 
+
+Most commands that accept glob patterns will also accept RegExp or Glob
+objects, described below. However, these are deprecated, as the pattern
+matching algorithms which use these are fairly poor. Instead, just pass
+a string containing pattern-matching characters.
 
 Commands:
 ---------
@@ -147,10 +150,13 @@ to edit when the current working document is the root of the project.
 -   `updoc`: Changes the current working doc to the container of the current
     doc.
 
--   `glob <string>`: Turns a string containing pattern characters such as '\*'
+-   `glob <string>`: *(Deprecated)* Turns a string containing pattern characters such as '\*'
     and '?' into a "Glob" object, which can be used by various commands to
     create a RegExp that matches against relative paths. Most commands which
-    accept RegExp values as arguments will also accept these.
+    accept RegExp values as arguments will also accept these. However, these
+    commands will generally accept string patterns, which will be compiled
+    into a form that will match much more efficiently. Using this function
+    is not recommended.
 
 -   `clear`: The project state maintains a cache of document properties. Use
     this command to clear that cache on the current project, in cases where an
@@ -263,8 +269,6 @@ These commands help manage documents.
 
         -   Otherwise, there are several "built-in" filter functions, available
             only in the interactive command mode:
-
-            -   `glob`
 
             -   `filter.hasTag(<string>)`
 
