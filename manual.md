@@ -255,11 +255,12 @@ therefore current working document can't be used.
 
 These commands help manage documents.
 
--   `lsdoc [docpath] [string | function] [array of string]`: Lists stew
+-   `lsdoc [docpath] [<string | function> [<string | array of string> [command...]]]`: Lists stew
     documents in the  specified or current working document, in their normal
     order. The second argument specifies a filter, and the third argument
-    specifies the name of fields or properties to return.
-
+    specifies the name of fields or properties to return. The fourth argument
+    is a command to run on each file.
+    
     -   The filter can be a string or a function.
 
         -   A generic function would basically take an API Doc object and a
@@ -268,13 +269,18 @@ These commands help manage documents.
             documents in a folder.
 
         -   Otherwise, there are several "built-in" filter functions, available
-            only in the interactive command mode:
+            only in the interactive command mode. Note that if a filter
+            function takes a filter as an argument, that argument can be
+            one of these functions, a generic filter function, or a string
+            filter definition.
+            
+            -   `filter.name(<string>)`
 
-            -   `filter.hasTag(<string>)`
+            -   `filter.tag(<array of string>)`
 
-            -   `filter.categoryIs(<string>)`
+            -   `filter.category(<string>)`
 
-            -   `filter.statusIs(<string>)`
+            -   `filter.status(<string>)`
 
             -   `filter.publish`
 
@@ -291,27 +297,61 @@ These commands help manage documents.
 
         -   The strings, made available for single-command mode, map to the
             above functions. Note that any spaces mean the string needs to be
-            enclosed in quotes from the command line.
+            enclosed in quotes from the command line. When the string filter
+            definitions take a filter in parentheses, that filter *must*
+            be another filter definition.
 
-            -   a glob pattern
+            -   `%<string>`: shortcut for `name=`, where the string is a
+            glob pattern.
+            
+            -   `name=<string>`
 
-            -   `hasTag=<string>`
+            -   `tag=<string>[,<string>]*`
 
-            -   `categoryIs=<string>`
+            -   `category=<string>`
 
-            -   `statusIs=<string>`
+            -   `status=<string>`
 
             -   `publish`
 
             -   `property:<string>=<any>`
 
-            -   `recurse(<string>)`
+            -   `recurse(<filter>[,<filter>]*)`
 
-            -   `or(<string>)`
+            -   `or(<filter>[,<filter>]*)`
 
-            -   `and(<string>)`
+            -   `and(<filter>[,<filter>]*)`
 
-            -   `not(<string>)`
+            -   `not(<filter>[,<filter>]*)`
+    
+    -   The field select functions can either be a comma-delimited string
+    listing the field names, or an array of the field names. The following
+    names are available:
+    
+        -   `category`
+        
+        -   `status`
+        
+        -   `tags`
+        
+        -   `tag:<string>`: a boolean field that indicates whether the
+        item was tagged with the specified name.
+        
+        -   `publish`
+        
+        -   `property:<string>`
+        
+        -   `synopsis`: In this case, the value is not listed in a column
+        delimited list, but returned on the next line after the name of the
+        file.
+        
+    -   When a command is passed as the last argument, after the list is
+    made, this command is run for each returned item in the list, passing
+    the document as the first argument. Any further arguments to the
+    command will be passed after that. This essentially allows you to
+    turn the `lsdoc` command into a sort of `foreach`, or more, a `map`. 
+    Once the commands have processed, an array will be returned containing
+    the results of these commands for each item in the list.
 
 -   `edit [docpath] [string]`: Looks for a primary file on the specified
     document (or current working document), and attempts to open it using the
@@ -326,6 +366,9 @@ These commands help manage documents.
 -   `mvdoc <docpath> <docpath> [string]`: Moves the document specified by the
     first argument into the document specified by the second. Optionally, it
     will also be renamed with the third argument.
+    
+-   `rename <docpath> <string>`: Renames the base of the document specified by
+    the first document to the name specified by the second.
 
 -   `dupdoc <docpath> <docpath> [string]`: Copies the document specified by the
     first argument into the document specfied by the second, optionally giving
