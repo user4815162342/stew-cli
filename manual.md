@@ -139,10 +139,15 @@ to edit when the current working document is the root of the project.
     no argument is passed, the new working directory will be the root of the
     project.
 
--   `ndoc`: Changes the current working doc to the next one in document order.
+-   `ndoc [filter]`: Changes the current working doc to the next one in document order.
+    Specifying a filter (see `lsdoc`) allows you to skip documents that don't match the filter.
+    Note that a recursive filter causes the children of all siblings to be included,
+    allowing for a inefficient directory walking mechanism.
 
--   `pdoc`: Changes the current working doc to the previous one in document
-    order.
+-   `pdoc [filter]`: Changes the current working doc to the previous one in document
+    order. Specifying a filter (see `lsdoc`) allows you to skip documents that don't match the filter.
+    Note that a recursive filter causes the children of all siblings to be included,
+    allowing for a inefficient directory walking mechanism.
 
 -   `dndoc`: Changes the current working doc to the first child of the current
     doc.
@@ -162,6 +167,9 @@ to edit when the current working document is the root of the project.
     this command to clear that cache on the current project, in cases where an
     external process might have changed some of the property files. In
     single-command mode, the cache only lasts the lifetime of the command.
+    
+-   `f`: This is an object which contains functions for creating filters
+    for use in `lsdoc` and other commands which contain document filters.
     
 ### Single Command Mode Only Commans.
 
@@ -255,13 +263,16 @@ therefore current working document can't be used.
 
 These commands help manage documents.
 
--   `lsdoc [docpath] [<string | function> [<string | array of string> [command...]]]`: Lists stew
+-   `lsdoc [docpath] [<boolean | string | function> [<string | array of string> [command...]]]`: Lists stew
     documents in the  specified or current working document, in their normal
     order. The second argument specifies a filter, and the third argument
     specifies the name of fields or properties to return. The fourth argument
     is a command to run on each file.
     
-    -   The filter can be a string or a function.
+    -   The filter can be a boolean, string or a function.
+        -   A boolean value of true causes the list to be recursive. This
+            is only possible in interactive mode, as true-like strings will
+            be treated as filenames.
 
         -   A generic function would basically take an API Doc object and a
             callback, which is called with an error, a boolean as to whether to
@@ -274,55 +285,85 @@ These commands help manage documents.
             one of these functions, a generic filter function, or a string
             filter definition.
             
-            -   `filter.name(<string>)`
+            -   `f.name(<string>)`: filters for file with a basename matching the
+            specified pattern.
+            
+            -   `f.path(<string>)`: filters for files with a path (from
+            the project root to the basename) matching the specified
+            pattern.
 
-            -   `filter.tag(<array of string>)`
+            -   `f.tag(<array of string>)`: filters for files containing
+            the specified tags.
 
-            -   `filter.category(<string>)`
+            -   `f.category(<string>)`: filters for files with the
+            specified category.
 
-            -   `filter.status(<string>)`
+            -   `f.status(<string>)`: filters for files with the specified
+            status.
 
-            -   `filter.publish`
+            -   `f.publish`: filters for files with publish set to
+            true.
 
-            -   `filter.property(<string>,<string>)`
+            -   `f.property(<string>[,<string>])`: filters for files
+            with a specified property name with the specified value. Will
+            match files which have any defined value for the property if
+            no value is passed.
 
-            -   `filter.recurse(filter)` -- automatically turns any filter into
-                a recursive list.
+            -   `f.recurse(filter[,filter])`: automatically turns any filter into
+            a recursive list. If only one filter is passed, all searches
+            will be recursive, even if the file itself doesn't match the
+            filter. However, if a second filter is passed, recursion will 
+            only happen if the file matches that filter. If no filters
+            are passed, all files are returned. The recurse
+            filter must be the top level, surrounding all other filters,
+            if it is wrapped inside another filter, that's not a recurse,
+            then no recursion will happen.
 
-            -   `filter.or(<array of filters>)`
+            -   `f.or(<array of filters>)`: A file matches if it
+            matches one of the filters in the list. The filter will return
+            as soon as it matches, so filters after the matching filter
+            will not be processed.
 
-            -   `filter.and(<array of filters>)`
+            -   `f.and(<array of filters>)`: A file matches only if
+            all filters match. The filter will return as soon as it doesn't
+            match, so filters after a failed filter will not be processed.
 
-            -   `filter.not(<filter>)`
-
+            -   `f.not(<filter>)`: A file matches only if the file
+            doesn't match the specified filter.
+            
+            -   `f.parse(<string>)`: Parses the specified text according
+            to the string values described below, into a function.
+            
         -   The strings, made available for single-command mode, map to the
             above functions. Note that any spaces mean the string needs to be
             enclosed in quotes from the command line. When the string filter
             definitions take a filter in parentheses, that filter *must*
             be another filter definition.
 
-            -   `%<string>`: shortcut for `name=`, where the string is a
+            -   `<string>`: shortcut for `name=`, where the string is a
             glob pattern.
             
-            -   `name=<string>`
+            -   `name(<string>)`
 
-            -   `tag=<string>[,<string>]*`
+            -   `tag(<string>[,<string>]*)`
 
-            -   `category=<string>`
+            -   `category(<string>)`
 
-            -   `status=<string>`
+            -   `status(<string>)`
 
             -   `publish`
 
-            -   `property:<string>=<any>`
+            -   `property(<string>,<any>)`
 
-            -   `recurse(<filter>[,<filter>]*)`
+            -   `recurse(<filter>[,<filter>])`
 
             -   `or(<filter>[,<filter>]*)`
 
             -   `and(<filter>[,<filter>]*)`
 
-            -   `not(<filter>[,<filter>]*)`
+            -   `not(<filter>)`
+            
+            -   `all`
     
     -   The field select functions can either be a comma-delimited string
     listing the field names, or an array of the field names. The following
@@ -334,7 +375,7 @@ These commands help manage documents.
         
         -   `tags`
         
-        -   `tag:<string>`: a boolean field that indicates whether the
+        -   `tag:<string>[,<string>]*`: a boolean field that indicates whether the
         item was tagged with the specified name.
         
         -   `publish`

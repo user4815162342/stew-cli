@@ -3,6 +3,20 @@ var os = require('os');
 
  
  /**
+  * TODO: Some expansion on handling the output of data from the 
+  * single-command mode (and possibly interactive mode as well). Instead of
+  * just strings and arrays, handle:
+  * - Objects: print them out as Property Value definitions. Ignore properties starting
+  * with "_" or "$". This will help out quite a bit. If we can get all
+  * members, not just "own" properties, that might be even better, because
+  * I can use it to list commands. A separate command would output using
+  * the standard output in the REPL.
+  * - Arrays: Do as now, except: If the Array has a 'columns' member,
+  * this will be a list of column definitions, including caption, property name and width (in characters).
+  * As well as columns which are subrows (must appear as their own row). The content
+  * is expected to match up with properties, only properties specified will be used.
+  * - Dates: Print them out according to the user's locale.
+  * 
   * TODO: Finish implementing the unimplemented commands.
   * */
  var engine = require("./lib/engine");
