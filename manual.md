@@ -341,7 +341,7 @@ These commands help manage documents.
             be another filter definition.
 
             -   `<string>`: shortcut for `name=`, where the string is a
-            glob pattern.
+                glob pattern.
             
             -   `name(<string>)`
 
@@ -355,7 +355,7 @@ These commands help manage documents.
 
             -   `property(<string>,<any>)`
 
-            -   `recurse(<filter>[,<filter>])`
+            -   `recurse[(<filter>[,<filter>])]`
 
             -   `or(<filter>[,<filter>]*)`
 
@@ -366,25 +366,54 @@ These commands help manage documents.
             -   `all`
     
     -   The field select functions can either be a comma-delimited string
-    listing the field names, or an array of the field names. The following
-    names are available:
+    listing of selectors, a function, or an array of strings and functions. 
     
-        -   `category`
+        -   a generic function would be take a doc object and a callback,
+            and call that callback with an error, the field name of the value,
+            and the property of the value.
         
-        -   `status`
+        -   otherwise, there are the following built-in selector functions.
+    
+            -   `s.category`
         
-        -   `tags`
+            -   `s.status`
         
-        -   `tag:<string>[,<string>]*`: a boolean field that indicates whether the
-        item was tagged with the specified name.
+            -   `s.tags`
         
-        -   `publish`
+            -   `s.tag(<string>[,<string>]*)`: a boolean field that indicates whether the
+                item was tagged with the specified name.
         
-        -   `property:<string>`
+            -   `s.publish`
         
-        -   `synopsis`: In this case, the value is not listed in a column
-        delimited list, but returned on the next line after the name of the
-        file.
+            -   `s.property(<string>)`
+        
+            -   `s.synopsis`: In this case, the value is not listed in a column
+                delimited list, but returned on the next line after the name of the
+                file.
+                
+        -   The string equivalents for the above functions, are:
+        
+            -   `category`
+            
+            -   `status`
+            
+            -   `tags`
+            
+            -   `tag(<string>[,<string>])`
+            
+            -   `publish`
+            
+            -   `property(<string>)
+            
+            -   `synopsis`
+            
+        -   When a lone string is passed as the selector argument, it is
+            parsed as a comma-delimited set of the above string-based
+            selectors. 
+            
+        -   When an Array is passed as the selector argument, any string
+            items are parsed as one of the set of above string-based 
+            selectors. Only one such command can be passed per item.
         
     -   When a command is passed as the last argument, after the list is
     made, this command is run for each returned item in the list, passing
