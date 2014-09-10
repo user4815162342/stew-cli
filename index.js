@@ -1,5 +1,6 @@
 #!/usr/bin/node
 var os = require('os');
+var writer = require("./lib/writer");
 
  
  /**
@@ -34,12 +35,7 @@ var os = require('os');
  
  var outputResult = function(data) {
      if (typeof data !== "undefined") {
-         if (data.join) {
-             // string arrays can be joined into lines to aid with formatting.
-             console.log(data.join(os.EOL));
-         } else {
-             console.log(data.toString());
-         }
+         console.log(writer(data));
      }
  }
  
