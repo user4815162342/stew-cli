@@ -4,19 +4,15 @@ var writer = require("./lib/writer");
 
  
  /**
-  * TODO: Some expansion on handling the output of data from the 
-  * single-command mode (and possibly interactive mode as well). Instead of
-  * just strings and arrays, handle:
-  * - Objects: print them out as Property Value definitions. Ignore properties starting
-  * with "_" or "$". This will help out quite a bit. If we can get all
-  * members, not just "own" properties, that might be even better, because
-  * I can use it to list commands. A separate command would output using
-  * the standard output in the REPL.
-  * - Arrays: Do as now, except: If the Array has a 'columns' member,
-  * this will be a list of column definitions, including caption, property name and width (in characters).
-  * As well as columns which are subrows (must appear as their own row). The content
-  * is expected to match up with properties, only properties specified will be used.
-  * - Dates: Print them out according to the user's locale.
+  * TODO: Another useful tool: 
+  * stew mru [number | string]: 
+  * - basically, whenever a project is opened in interactive stew, it is
+  * recorded in the global settings file. The mru command would list
+  * these files. If passed a parameter, it will open the repl with either
+  * the project file found at that index, or would open the repl with the
+  * project whose basename is the specified string. (If mru is used within
+  * the repl already, it will just list the files or open the project, obviously)
+  * 
   * 
   * TODO: Finish implementing the unimplemented commands.
   * */
