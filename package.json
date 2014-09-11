@@ -1,6 +1,6 @@
 {
   "name": "stew-cli",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Stew Tools CLI for nodejs",
   "repository": "https://github.com/user4815162342/stew-cli",
   "main": "index.js",
