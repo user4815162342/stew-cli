@@ -8,14 +8,15 @@
     "stew": "./index.js"
   },
   "dependencies": {
-    "ansi-styles": "^1.1.0",
+    "ansi-styles": "~1.1.0",
     "mime": "~1.2",
     "minimatch": "~1.0",
     "mkdirp": "~0.5",
     "opener": "~1.3",
     "path-extra": "~0.2",
     "shelljs": "~0.3",
-    "stew-core": "user4815162342/stew-core"
+    "stew-core": "user4815162342/stew-core",
+    "supports-color": "^1.1.0"
   },
   "scripts": {
     "test": "echo \"Testing not implemented yet\" && exit 1"
