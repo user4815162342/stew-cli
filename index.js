@@ -8,7 +8,6 @@ var writer = require("./lib/writer");
   * sense. For example: "list" instead of "lsdoc". I think this will make
   * this thing easier to use and more aesthetically pleasing:
   * 
-  * lstag => get tags (it's just 'get')
   * addref => ref[erence]
   * rmref => unref[erence]
   * lsref => get references

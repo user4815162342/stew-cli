@@ -147,12 +147,12 @@ to edit when the current working document is the root of the project.
     project.
 
 -   `next [filter]`: Changes the current working doc to the next one in document order.
-    Specifying a filter (see `lsdoc`) allows you to skip documents that don't match the filter.
+    Specifying a filter (see `list`) allows you to skip documents that don't match the filter.
     Note that a recursive filter causes the children of all siblings to be included,
     allowing for a inefficient directory walking mechanism.
 
 -   `previous [filter]`: Changes the current working doc to the previous one in document
-    order. Specifying a filter (see `lsdoc`) allows you to skip documents that don't match the filter.
+    order. Specifying a filter (see `list`) allows you to skip documents that don't match the filter.
     Note that a recursive filter causes the children of all siblings to be included,
     allowing for a inefficient directory walking mechanism.
 
@@ -176,7 +176,7 @@ to edit when the current working document is the root of the project.
     single-command mode, the cache only lasts the lifetime of the command.
     
 -   `f`: This is an object which contains functions for creating filters
-    for use in `lsdoc` and other commands which contain document filters.
+    for use in `list` and other commands which contain document filters.
     
     
     
@@ -270,7 +270,7 @@ therefore current working document can't be used.
 
 These commands help manage documents.
 
--   `lsdoc [docpath] [<boolean | string | function> [<string | array of string> [command...]]]`: Lists stew
+-   `list [docpath] [<boolean | string | function> [<string | array of string | function | array of functions > [command...]]]`: Lists stew
     documents in the  specified or current working document, in their normal
     order. The second argument specifies a filter, and the third argument
     specifies the name of fields or properties to return. The fourth argument
@@ -426,7 +426,7 @@ These commands help manage documents.
     made, this command is run for each returned item in the list, passing
     the document as the first argument. Any further arguments to the
     command will be passed after that. This essentially allows you to
-    turn the `lsdoc` command into a sort of `foreach`, or more, a `map`. 
+    turn the `list` command into a sort of `foreach`, or more, a `map`. 
     Once the commands have processed, an array will be returned containing
     the results of these commands for each item in the list.
 
@@ -437,26 +437,24 @@ These commands help manage documents.
     if 1) the primary file does not exist and needs to be created or 2) there
     are multiple primary files with different extensions.
 
--   `mkdoc [docpath] <string>`: Creates a new document relative to the current
+-   `create [docpath] <string>`: Creates a new document relative to the current
     working document.
 
--   `mvdoc <docpath> <docpath> [string]`: Moves the document specified by the
+-   `move <docpath> <docpath> [string]`: Moves the document specified by the
     first argument into the document specified by the second. Optionally, it
     will also be renamed with the third argument.
     
 -   `rename <docpath> <string>`: Renames the base of the document specified by
     the first document to the name specified by the second.
 
--   `dupdoc <docpath> <docpath> [string]`: Copies the document specified by the
+-   `copy <docpath> <docpath> [string]`: Copies the document specified by the
     first argument into the document specfied by the second, optionally giving
     the result a new name.
 
--   `gprop [docpath] <string>`: Gets the value of a property on the current
-    document, or the specified document. The properties "status", "category" and
-    "publish" can be managed with get- and set-prop, and even then not in the
-    root document. All other property names used with this command will be
-    stored and retrieved from the 'user' space of the properties, so this can
-    not be used to work with references and tags.
+-   `get [docpath] <string | array of string | function | array of functions >`: 
+    Gets the value of a property or properties on the current
+    document, or the specified document. The parameter passed to retrieve the
+    object is a getter, the same as used in `list`. 
 
 -   `sprop [docpath] <string> <any>`: See get-prop.
 
@@ -464,13 +462,9 @@ These commands help manage documents.
 
 -   `untag [docpath] <string>`: Removes a tag from a document.
 
--   `lstag [docpath]`: Lists the tags in a document.
+-   `reference [docpath] <docpath> [string]`:
 
--   `addref [docpath] <docpath> [string]`:
-
--   `rmref [docpath] <docpath>`:
-
--   `lsref [docpath]`:
+-   `unreference [docpath] <docpath>`:
 
 -   `ord [docpath] <string | number> [string]`: Repositions the specified
     document in its parent directory. The second argument specifies the new
