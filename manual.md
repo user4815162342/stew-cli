@@ -466,15 +466,15 @@ These commands help manage documents.
 
 -   `unreference [docpath] <docpath>`:
 
--   `ord [docpath] <string | number> [string]`: Repositions the specified
+-   `order [docpath] <string | number> [string]`: Repositions the specified
     document in its parent directory. The second argument specifies the new
     position. The third argument is needed for the "before" and "after"
     positions to indicate another document.
 
--   `nstat [docpath]`: Moves the document to the next status, and returns that
+-   `nextstatus [docpath]`: Moves the document to the next status, and returns that
     status.
 
--   `pstat [docpath]`: Moves the document to the previous status, and returns
+-   `prevstatus [docpath]`: Moves the document to the previous status, and returns
     that status.
 
 -   `synopsis [docpath]`: Attemps to edit the synopsis for the current document.

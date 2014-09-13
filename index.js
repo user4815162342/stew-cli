@@ -8,12 +8,6 @@ var writer = require("./lib/writer");
   * sense. For example: "list" instead of "lsdoc". I think this will make
   * this thing easier to use and more aesthetically pleasing:
   * 
-  * addref => ref[erence]
-  * rmref => unref[erence]
-  * lsref => get references
-  * ord => order
-  * nstat => set status(next) (it's just 'set', but with a special parameter for the status updater
-  * pstat => set status(previous)
   * gsynopsis => get synopsis (it's just 'get')
   * lsbackup => get backups
   * 
