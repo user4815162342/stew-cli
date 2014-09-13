@@ -8,12 +8,6 @@ var writer = require("./lib/writer");
   * sense. For example: "list" instead of "lsdoc". I think this will make
   * this thing easier to use and more aesthetically pleasing:
   * 
-  * proj => project
-  * chdoc => goto
-  * ndoc => next
-  * pdoc => prev[ious]
-  * dndoc => down
-  * updoc => up
   * config gprop => config get
   * config sprop => config set
   * config mkcat => cat[egory] create

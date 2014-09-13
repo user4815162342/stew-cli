@@ -217,35 +217,31 @@ differ slightly depending on which mode they are used with.
 
 These commands manage the properties for the project.
 
--   `config gprop <string>`:
+-   `config get <string>`:
 
--   `config sprop <string> <any>`:
+-   `config set <string> <any>`:
 
--   `config mkcat <string>`: Creates a new category
+-   `category create <string>`: Creates a new category
 
--   `config rmcat <string>`: Removes a category
+-   `category remove <string>`: Removes a category
 
--   `config lscat`: Lists all categories.
+-   `category list`: Lists all categories.
 
--   `config gcatprop <string> <string>`:
+-   `category get <string> <string>`:
 
--   `config scatprop <string> <string> <any>`:
+-   `category set <string> <string> <any>`:
 
--   `config mvcat <string> <string>`:
+-   `category rename <string> <string>`:
 
--   `config defcat [string]`: Set or get default category.
+-   `status create <string>`:
 
--   `config mkstat <string>`:
+-   `status remove <string>`:
 
--   `config rmstat <string>`:
+-   `status list <string>`:
 
--   `config lsstat <string>`:
+-   `status order <string> <string> [string]`:
 
--   `config ordstat <string> <string> [string]`:
-
--   `config mvstat <string> <string>`:
-
--   `config defstat [string]`: Get or set default status
+-   `status rename <string> <string>`:
 
 -   `config editor <string> [<string>]`: Get or set a command to use for editing
     a mime-type.
