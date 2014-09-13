@@ -32,7 +32,8 @@ when you need to run one quick command and then get on to other work.
 Interactive Mode:
 -----------------
 
-Interactive mode is initiated by running the "stew" command without arguments.
+Interactive mode is initiated by running the "stew" command without arguments,
+or by using the `open` or `init` commands in single-command mode.
 This brings you into a shell-like interface that let's you type and execute
 commands, while maintaining a memory of project state, as well as making it easy
 to maintain your own state using variables. This is more useful when doing lots
@@ -171,36 +172,38 @@ to edit when the current working document is the root of the project.
 -   `f`: This is an object which contains functions for creating filters
     for use in `lsdoc` and other commands which contain document filters.
     
-### Single Command Mode Only Commans.
-
-This commands is only available in single-command mode, and is useful for
-setting up some options for the REPL environment with some additional 
-options.
-
--    `repl [project [boolean]]`: If a project is specified, the repl will
-automatically open up that project instead of the one specified in settings.
-If the boolean value is specified as true, then the repl will open up in
-private mode. In private mode, the global settings will not be saved, which
-means projects opened in the repl will not be remembered. This is useful
-for using stew with sensitive documents.
-
 ### Stew Project Commands:
 
-These are commands which manage the stew project itself.
+These are commands which manage the stew project itself. These commands
+differ slightly depending on which mode they are used with.
 
--   `open <string> [boolean]`: Opens a Stew Project either in the current
+-   `open <string> [boolean]` (interactive mode): Opens a Stew Project either in the current
     working directory, or at a specified path relative to that. If no stew
     project is found in the directory, it will look upwards in containing
     directories until it finds one. If the second argument passed is "true",
     this automatic searching will not happen. This command is mostly useless in
     single-command mode, except for possibly as a quick check to see if a
     project exists in the directory.
+    
+-   `open <string> [boolean]` (single-command mode): Starts
+    up interactive mode and opens the specified project. In this case,
+    the second argument is used to turn on private mode (searching is
+    automatically turned off with this version). In private mode, the 
+    global settings will not be saved, which means projects opened in 
+    the repl will not be remembered. This is useful for using stew with 
+    sensitive documents.
 
--   `init <string>`: Creates a Stew Project in the current working directory, or
-    at the specified path. This will first check if the directory is within a
+-   `init <string>` (interactive mode): Creates a Stew Project in the 
+    current working directory, or at the specified path. This will first 
+    check if the directory is within a
     stew project already, and return an error if it is. This does not completely
     prevent creating nested stew projects, since it doesn't check downwards
     through all directories, but it helps.
+    
+-   `init <string> [boolean]` (single-command mode): Creates a Stew Project
+    as with the interactive mode version, then opens up the repl with the
+    new project. The second argument can be used to turn on private mode,
+    as with `open`.
 
 ### Configuration Commands:
 
@@ -478,7 +481,7 @@ These commands help manage documents.
 
 -   `synopsis [docpath]`: Attemps to edit the synopsis for the current document.
 
--   `getSynopsis [docpath]`: Returns the text of the synopsis for the current
+-   `gsynopsis [docpath]`: Returns the text of the synopsis for the current
     document.
 
 -   `thumbnail [docpath] [string]`: Attemps to edit the thumbnail for the
