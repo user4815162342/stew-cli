@@ -178,6 +178,8 @@ to edit when the current working document is the root of the project.
 -   `f`: This is an object which contains functions for creating filters
     for use in `lsdoc` and other commands which contain document filters.
     
+    
+    
 ### Stew Project Commands:
 
 These are commands which manage the stew project itself. These commands
@@ -375,7 +377,7 @@ These commands help manage documents.
             -   `all`
     
     -   The field select functions can either be a comma-delimited string
-    listing of selectors, a function, or an array of strings and functions. 
+    listing of getters, a function, or an array of strings and functions. 
     
         -   a generic function would be take a doc object and a callback,
             and call that callback with an error, the field name of the value,
@@ -383,20 +385,20 @@ These commands help manage documents.
         
         -   otherwise, there are the following built-in selector functions.
     
-            -   `s.category`
+            -   `g.category`
         
-            -   `s.status`
+            -   `g.status`
         
-            -   `s.tags`
+            -   `g.tags`
         
-            -   `s.tag(<string>[,<string>]*)`: a boolean field that indicates whether the
+            -   `g.tag(<string>[,<string>]*)`: a boolean field that indicates whether the
                 item was tagged with the specified name.
         
-            -   `s.publish`
+            -   `g.publish`
         
-            -   `s.property(<string>)`
+            -   `g.property(<string>)`
         
-            -   `s.synopsis`: In this case, the value is not listed in a column
+            -   `g.synopsis`: In this case, the value is not listed in a column
                 delimited list, but returned on the next line after the name of the
                 file.
                 
@@ -418,11 +420,11 @@ These commands help manage documents.
             
         -   When a lone string is passed as the selector argument, it is
             parsed as a comma-delimited set of the above string-based
-            selectors. 
+            getters. 
             
         -   When an Array is passed as the selector argument, any string
             items are parsed as one of the set of above string-based 
-            selectors. Only one such command can be passed per item.
+            getters. Only one such command can be passed per item.
         
     -   When a command is passed as the last argument, after the list is
     made, this command is run for each returned item in the list, passing
