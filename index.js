@@ -4,27 +4,18 @@ var writer = require("./lib/writer");
 
  
  /**
-  * TODO: Consider changing the names of some of the commands to make more
-  * sense. For example: "list" instead of "lsdoc". I think this will make
-  * this thing easier to use and more aesthetically pleasing:
-  * 
-  * gsynopsis => get synopsis (it's just 'get')
-  * lsbackup => get backups
-  * 
   * TODO: Now that I've got selectors, updators are useful too, for mass
-  * update of fields using lsdoc (or perhaps a separate, similar command)
-  * 
-  * TODO: gprop and sprop could use selectors and updators to simplify 
-  * their functionality.
+  * update of fields using lsdoc (or perhaps a separate, similar command, like `update`)
   * 
   * TODO: Another useful tool: 
   * stew recent [number | string]: 
   * - basically, whenever a project is opened in interactive stew, it is
-  * recorded in the global settings file. The mru command would list
-  * these files. If passed a parameter, it will open the repl with either
-  * the project file found at that index, or would open the repl with the
-  * project whose basename is the specified string. (If mru is used within
-  * the repl already, it will just list the files or open the project, obviously)
+  * recorded as recently opened in the global settings file. The recent command would list
+  * these files (it should also be able to clear them). If passed a parameter, 
+  * it will open the repl with either the project file found at that index, or 
+  * would open the repl with the project whose basename is the specified string. 
+  * (If mru is used within the repl already, it will just list the files or 
+  * open the project, obviously)
   * 
   * TODO: Finish implementing the unimplemented commands.
   * */

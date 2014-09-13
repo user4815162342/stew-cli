@@ -479,9 +479,6 @@ These commands help manage documents.
 
 -   `synopsis [docpath]`: Attemps to edit the synopsis for the current document.
 
--   `gsynopsis [docpath]`: Returns the text of the synopsis for the current
-    document.
-
 -   `thumbnail [docpath] [string]`: Attemps to edit the thumbnail for the
     current document. The second parameter is a file extension, used similarly
     to the edit command.
