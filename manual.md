@@ -53,6 +53,11 @@ JavaScript data may be passed as arguments (as long as the command supports
 this). This, of course, implies that other implementations of Stew Tools CLI
 would use different scripting languages.
 
+Keep in mind that many of these commands are asynchronous, which means you
+can't just assign their results to a value. In order to get the results of
+asynchronous commands, you'll find them stored in a special variable 
+called "_".
+
 ### Non-Stew Commands:
 
 Interactive mode is implemented using Node.js' [Read-Eval-Print Loop module][1].
@@ -129,31 +134,32 @@ to edit when the current working document is the root of the project.
 
 -   `close`: See the open command, below. This closes the current stew project.
 
--   `proj`: Allows access to the in-memory project object itself, giving you
+-   `project`: Allows access to the in-memory project object itself, giving you
     access to everything in the project using the core API.
 
--   `doc`: Gives API access to the current working doc.
+-   `doc`: Gives API access to the current working doc. Note that this
+    command is asynchronous, and must be called to get the value.
 
--   `chdoc [docpath]`: Changes the current working doc to the specified value.
+-   `goto [docpath]`: Changes the current working doc to the specified value.
     This value can be a string path, relative to the base of the project, a
     RegExp, a Glob (see `glob` below), or it can be an actual API doc object. If
     no argument is passed, the new working directory will be the root of the
     project.
 
--   `ndoc [filter]`: Changes the current working doc to the next one in document order.
+-   `next [filter]`: Changes the current working doc to the next one in document order.
     Specifying a filter (see `lsdoc`) allows you to skip documents that don't match the filter.
     Note that a recursive filter causes the children of all siblings to be included,
     allowing for a inefficient directory walking mechanism.
 
--   `pdoc [filter]`: Changes the current working doc to the previous one in document
+-   `previous [filter]`: Changes the current working doc to the previous one in document
     order. Specifying a filter (see `lsdoc`) allows you to skip documents that don't match the filter.
     Note that a recursive filter causes the children of all siblings to be included,
     allowing for a inefficient directory walking mechanism.
 
--   `dndoc`: Changes the current working doc to the first child of the current
+-   `down`: Changes the current working doc to the first child of the current
     doc.
 
--   `updoc`: Changes the current working doc to the container of the current
+-   `up`: Changes the current working doc to the container of the current
     doc.
 
 -   `glob <string>`: *(Deprecated)* Turns a string containing pattern characters such as '\*'
