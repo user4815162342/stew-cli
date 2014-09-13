@@ -8,12 +8,6 @@ var writer = require("./lib/writer");
   * sense. For example: "list" instead of "lsdoc". I think this will make
   * this thing easier to use and more aesthetically pleasing:
   * 
-  * lsdoc => list
-  * mkdoc => create
-  * mvdoc => move
-  * dupdoc => copy
-  * gprop => get
-  * sprop => set
   * lstag => get tags (it's just 'get')
   * addref => ref[erence]
   * rmref => unref[erence]
