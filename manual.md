@@ -252,17 +252,17 @@ These commands are for managing the tag and their properties in the stew
 project. In this case, doc paths reference the paths to the tags themselves, and
 therefore current working document can't be used.
 
--   `tags ls`: Lists all tags available in the project.
+-   `tags list`: Lists all tags available in the project.
 
--   `tags mk <string>`: Makes a new tag
+-   `tags create <string>`: Makes a new tag
 
--   `tags rm` `<docpath>`: Removes a tag
+-   `tags remove` `<docpath>`: Removes a tag
 
--   `tags mv <docpath> <docpath> [string]`:
+-   `tags move <docpath> <docpath> [string]`:
 
--   `tags gprop <docpath> <string>`:
+-   `tags get <docpath> <string>`:
 
--   `tags sprop <docpath> <string> <any>`:
+-   `tags set <docpath> <string> <any>`:
 
 -   `tags edit <docpath>`:
 

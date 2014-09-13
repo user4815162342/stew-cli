@@ -8,27 +8,6 @@ var writer = require("./lib/writer");
   * sense. For example: "list" instead of "lsdoc". I think this will make
   * this thing easier to use and more aesthetically pleasing:
   * 
-  * config gprop => config get
-  * config sprop => config set
-  * config mkcat => cat[egory] create
-  * config rmcat => cat remove
-  * config lscat => cat list
-  * config gcatprop => cat get
-  * config scatprop => cat set
-  * config mvcat => cat rename
-  * config defcat => config set defaultCategory (it's just config set)
-  * config mkstat => stat[us] create
-  * config rmstat => stat remove
-  * config lsstat => stat list
-  * config ordstat => stat order
-  * config mvstat => stat rename
-  * config defstat => config set defaultStatus
-  * tags ls => tags list
-  * tags mk => tags create
-  * tags rm => tags remove
-  * tags mv => tags rename/tags move
-  * tags gprop => tags get
-  * tags sprop => tags set
   * lsdoc => list
   * mkdoc => create
   * mvdoc => move
