@@ -4,20 +4,7 @@ var writer = require("./lib/writer");
 
  
  /**
-  * TODO: Now that I've got selectors, updators are useful too, for mass
-  * update of fields using lsdoc (or perhaps a separate, similar command, like `update`)
-  * 
-  * TODO: Another useful tool: 
-  * stew recent [number | string]: 
-  * - basically, whenever a project is opened in interactive stew, it is
-  * recorded as recently opened in the global settings file. The recent command would list
-  * these files (it should also be able to clear them). If passed a parameter, 
-  * it will open the repl with either the project file found at that index, or 
-  * would open the repl with the project whose basename is the specified string. 
-  * (If mru is used within the repl already, it will just list the files or 
-  * open the project, obviously)
-  * 
-  * TODO: Finish implementing the unimplemented commands.
+  * NOTE: See todo.txt for tasks to be done.
   * */
  var engine = require("./lib/engine");
  

@@ -1,0 +1,173 @@
+ 
+TODO: Bug in finding docs by glob pattern:
+ 
+ Seems to occur when I specify a glob pattern in a directory and then follow it up with another file in the path, for example:
+ list("../Story/Stev* /What Gail Found*") -- note, no space after *
+ but not:
+ list("../Story/Stevenson Falls, WI, USA -- Earth/What Gail Found*")
+ 
+ but, this does cause the error (no space after *)
+ list("../Story/Stevenson Falls, WI, USA -- Earth/What Gail* /Sometime in 2007") 
+ 
+ 
+ /usr/local/lib/node_modules/stew-cli/node_modules/stew-core/lib/docs.js:273
+                            return matchEachDoc(docs,cb);
+                                   ^
+ReferenceError: matchEachDoc is not defined
+    at /usr/local/lib/node_modules/stew-cli/node_modules/stew-core/lib/docs.js:273:36
+    at /usr/local/lib/node_modules/stew-cli/node_modules/stew-core/lib/docs.js:244:32
+    at null.<anonymous> (/usr/local/lib/node_modules/stew-cli/node_modules/stew-core/lib/docs.js:403:20)
+    at /usr/local/lib/node_modules/stew-cli/node_modules/stew-core/node_modules/SFMS/lib/ps.js:314:16
+    at Object.oncomplete (fs.js:107:15)
+
+
+TODO: Need a "Help" task which lists all of the commands.
+
+TODO: Need to handle "Tasks". Basically, my first instinct is that these are
+stored in an attachment labeled _tasks.txt, probably using something like a
+todo.txt format. That way, tasks can be applied to specific documents, rather
+than be in a separate section and have to reference those docs
+(although global tasks would be available too). There would be four commands:
+- add task: creates a task either for a document or globally. It should also
+be possible to add a task to multiple files based on tags or something else.
+- edit task: edit the description of a task, and the start and due dates associated with it.
+- set task priority: set a priority of a task.
+- list tasks: list's tasks in the current directory, or global tasks, sorted
+according to priority and due date.
+- complete task: marks a task as completed, possibly with a reason.
+
+TODO: List should at least have an option for indicating files that are directories. For
+example, a '+' sign next to it, or something. Or a Wingding folder symbol, if there is one.
+
+TODO: The 'create' command doesn't really behave appropriately when it switches to the 
+document after creating:
+1) it doesn't indicate that it's 'creating' the document, but does indicate that the working
+document is changed, so it looks to me like create actually means move.
+2) Sometimes, and actually, quite often after working with this for a bit, I don't want to
+go to the document after creating it. Sometimes, I want to edit it, or just look at it and
+sigh.
+ 
+TODO: When printing out the synopsis in a list, it extends over the edge of the screen, instead of being
+wrapped around. I wonder if I should be putting some sort of "wrap style" on the synopsis when it's retrieved.
+
+TODO: Need a command to synchronize the current working directory with the current working document, so
+that I can use the file operations on things.
+
+TODO: When creating documents, it would be nice to be able to set some properties at the same time.
+With the creation of 'setters', mentioned elsewhere, this could be done easily.
+ 
+TODO: I don't know why this isn't here, but there's also an issue with ** patterns.
+ 
+TODO: Need to be able to store current document locations and return to them quickly. I'd like an
+ Alt-Tab type interface for this, rather than trying to remember bookmark names. For example,
+ a command "switch" would put it into a mode where it's waiting for keys. An arrow key right or left
+ would cycle through a set of previous locations, perhaps even open projects (but that would require
+ a lot more changes). If you don't press anything for a second or so, it would just switch back and
+ forth between the two most recent, like Alt-Tab.
+ 
+TODO: I really want to be able to color things according to either status, or some tag, instead of
+ category. Or, give the user the ability to do this. I mean, coloring by category is nice, but I'd rather
+ make it easier to find the items that haven't been done yet: My use of Task as a category to make things
+ red is a kludge. Yes, Tasks should be red, but the category of these docs should be Scene, not Task.
+ Therefore, I would rather be able to see scenes with a status of "To Do" be red instead. 
+ 
+ One option: categories get a little "bullet" next to them, which is printed in the color it should be,
+ and statuses also get a color, which is applied to the actual text. In a GUI, categories might be
+ able to get an icon, so this is close to what I want.
+ 
+TODO: Trying to find a document with an apostrophe in it's name
+ doesn't work. This happens with any command when specifying it as a
+ path, or when comparing the names themselves (for example, when used
+ as a predicate for "after")
+ 
+TODO: It would be nice if the command line would retain it's history between
+sessions, perhaps with a max limit, of course.
+ 
+TODO: A Rename doesn't keep order. It should. But then, that would also
+mean we *would*, after all, have to maintain references as well.
+ 
+TODO: "Set" should allow a null value or undefined to delete a property value.
+ 
+TODO: order should accept glob patterns for before and after predicates.
+ 
+TODO: Now that I've got selectors, updators are useful too, for mass
+ update of fields using list (or perhaps a separate, similar command, like `update`)
+ 
+TODO: Need a mechanism to make it easy to send a certain set of pieces
+ (by category, or tag, for example) to a cloud service, and pull them
+ back in again later. Since this would involve mechanisms out of scope
+ for stew, this is almost a different command line. But, at the very
+ least, I could create a system for syncing a certain set of files with
+ another folder. But, since some cloud services support tags, if I
+ had specific mechanisms, it would work great. This is probably a 'plugin'
+ oriented mechanism.
+ 
+TODO: A "view" mechanism would be nice, so I can save a search for all
+ docs marked with some property, for example. -- This is fairly simple
+ to solve within a session: var view = list.bind(null,".","foo*","category")
+ But, this isn't saveable across sessions. Some sort of macro mechanism
+ would fix that. Possibly, a dot-command:
+ .macro <name> <code>.
+ 
+ The macro would be stored in the project settings and evaluated into 
+ a variable with the specified name at startup (as well as upon creation). 
+ That way, it would be 1) Saveable in text form and 2) bound to the 
+ correct scopes.
+ 
+ But, macros are security problems. Better would be just a view definition
+ thing, and you could just type view("foo"), or better yet, view.foo().
+ This could then be stored in the project itself, in _stew.json.
+ 
+TODO: Another useful tool: 
+ stew recent [number | string]: 
+ - basically, whenever a project is opened in interactive stew, it is
+ recorded as recently opened in the global settings file. The recent command would list
+ these files (it should also be able to clear them). If passed a parameter, 
+ it will open the repl with either the project file found at that index, or 
+ would open the repl with the project whose basename is the specified string. 
+ (If mru is used within the repl already, it will just list the files or 
+ open the project, obviously)
+ 
+TODO: Convert stew core, and stew cli, to work with Promises instead
+ of callbacks (and also replace the "AsynchronousCommand" with them. 
+ If it's thorough enough, it should make a lot of the callback stuff 
+ less painful.
+ 
+TODO: Finish implementing the unimplemented commands.
+ 
+TODO: Work on a GUI. So far, I have a few options:
+ - an "ncurses"-like interface -- which might or might not be easier
+ to do, but could easily be used to almost replace the CLI.
+ - a node-webkit interface -- which would be fine, but I'm still
+ worried about performance, especially with bugs that I've seen in
+ my nw-ssb stuff (although I've been pin-pointing those to the sites
+ themselves).
+ - also, look at something called atom-shell, which appears to be
+ similar to node-webkit, I'm not sure how it's different. It's backed
+ by github, and specifically used for writing a standalone IDE for them,
+ (not sure why they need one). There are several architectural differences
+ which seem to make sense (more context separation between back and front,
+ no "single main window" which was always my issue with Delphi, and
+ which NW seems to maintain).
+ 
+ I wish I could create the GUI in gtk or qt or something, to improve
+ things, but that only really makes sense if I rewrite the libraries
+ in some language which those can connect to -- or if someone finishes
+ and maintains all of those various node-gtk or -qt links.
+ 
+ Of course, I could also learn some simple cross-platform compilable 
+ language (valac?, C++?) that binds to these and rewrite the whole 
+ thing in that. Probably, the best choice right now is Qt, but I'm
+ not sure what it's future is. It does seem to support Mac, and probably
+ IOS, better than Gtk.
+ 
+ -- Honestly, I'm tempted to just go straight to Qt when I'm ready
+ to create the GUI. The rewrite of the back end might be easier if
+ there's no callback hell involved -- not to mention they do support
+ JavaScript in their QML/QtQuick system.
+ 
+ -- Might be better to create a Qt Markdown Editor first, then I could retain
+ the feature of being able to store whatever file types you want in this,
+ and therefore make the editor optional.
+
+
