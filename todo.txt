@@ -1,29 +1,7 @@
  
-TODO: Bug in finding docs by glob pattern:
- 
- Seems to occur when I specify a glob pattern in a directory and then follow it up with another file in the path, for example:
- list("../Story/Stev* /What Gail Found*") -- note, no space after *
- but not:
- list("../Story/Stevenson Falls, WI, USA -- Earth/What Gail Found*")
- 
- but, this does cause the error (no space after *)
- list("../Story/Stevenson Falls, WI, USA -- Earth/What Gail* /Sometime in 2007") 
- 
- 
- /usr/local/lib/node_modules/stew-cli/node_modules/stew-core/lib/docs.js:273
-                            return matchEachDoc(docs,cb);
-                                   ^
-ReferenceError: matchEachDoc is not defined
-    at /usr/local/lib/node_modules/stew-cli/node_modules/stew-core/lib/docs.js:273:36
-    at /usr/local/lib/node_modules/stew-cli/node_modules/stew-core/lib/docs.js:244:32
-    at null.<anonymous> (/usr/local/lib/node_modules/stew-cli/node_modules/stew-core/lib/docs.js:403:20)
-    at /usr/local/lib/node_modules/stew-cli/node_modules/stew-core/node_modules/SFMS/lib/ps.js:314:16
-    at Object.oncomplete (fs.js:107:15)
-
-
 TODO: Need a "Help" task which lists all of the commands.
 
-TODO: Need to handle "Tasks". Basically, my first instinct is that these are
+TODO: Need to handle User Tasks. Basically, my first instinct is that these are
 stored in an attachment labeled _tasks.txt, probably using something like a
 todo.txt format. That way, tasks can be applied to specific documents, rather
 than be in a separate section and have to reference those docs
