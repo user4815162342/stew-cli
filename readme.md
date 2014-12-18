@@ -43,17 +43,19 @@ will probably still be able to go through it and see what's there.
 
 ## Installation:
 
-Stew is not yet set up as an npm package. It is, however, installable with
-npm from the github repository. Just do this (`sudo` as desired):
+Stew command line is an application. It isn't really intended as a library,
+so you should install it globally to make "stew" available in your path:
 
-`npm -g install user4815162342/stew-cli`
+`npm -g install stew-cli`
 
-And "stew" will be available in your path.
+Sudo as necessary.
 
-Note that `npm -g update` won't automatically update this (yet?). Instead,
-to make sure it's updated, just run the install again.
+That said, it is possible to use stew-cli as a library, to some extent,
+although the advantages of this aren't clear to me. In that case, you
+should install it locally in your project.
 
-You can check the current version of stew CLi with:
+`npm install --save stew-cli`
+
 
 `stew version`
 

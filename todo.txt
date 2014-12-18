@@ -1,5 +1,36 @@
+== Bugs ==
+
+TODO: Trying to find a document with an apostrophe in it's name
+ doesn't work. This happens with any command when specifying it as a
+ path, or when comparing the names themselves (for example, when used
+ as a predicate for "after")
+ 
+TODO: order should accept glob patterns for before and after predicates.
+ 
+
+== Mis-Features ==
+ 
+TODO: The 'create' command doesn't really behave appropriately when it switches to the 
+document after creating:
+1) it doesn't indicate that it's 'creating' the document, but does indicate that the working
+document is changed, so it looks to me like create actually means move.
+2) Sometimes, and actually, quite often after working with this for a bit, I don't want to
+go to the document after creating it. Sometimes, I want to edit it, or just look at it and
+sigh.
+ 
+== Features ==
  
 TODO: Need a "Help" task which lists all of the commands.
+
+TODO: Convert stew core, and stew cli, to work with Promises instead
+ of callbacks (and also replace the "AsynchronousCommand" with them. 
+ If it's thorough enough, it should make a lot of the callback stuff 
+ less painful.
+ 
+TODO: Need a command to synchronize the current working directory with the current working document, so
+that I can use the js shell file operations on the project. This might be something that's done
+automatically when you change the working doc... the only problem is I can only change to the directory
+if the doc *is* a directory.
 
 TODO: Need to handle User Tasks. Basically, my first instinct is that these are
 stored in an attachment labeled _tasks.txt, probably using something like a
@@ -17,31 +48,19 @@ according to priority and due date.
 TODO: List should at least have an option for indicating files that are directories. For
 example, a '+' sign next to it, or something. Or a Wingding folder symbol, if there is one.
 
-TODO: The 'create' command doesn't really behave appropriately when it switches to the 
-document after creating:
-1) it doesn't indicate that it's 'creating' the document, but does indicate that the working
-document is changed, so it looks to me like create actually means move.
-2) Sometimes, and actually, quite often after working with this for a bit, I don't want to
-go to the document after creating it. Sometimes, I want to edit it, or just look at it and
-sigh.
- 
 TODO: When printing out the synopsis in a list, it extends over the edge of the screen, instead of being
 wrapped around. I wonder if I should be putting some sort of "wrap style" on the synopsis when it's retrieved.
 
-TODO: Need a command to synchronize the current working directory with the current working document, so
-that I can use the file operations on things.
-
 TODO: When creating documents, it would be nice to be able to set some properties at the same time.
 With the creation of 'setters', mentioned elsewhere, this could be done easily.
- 
-TODO: I don't know why this isn't here, but there's also an issue with ** patterns.
  
 TODO: Need to be able to store current document locations and return to them quickly. I'd like an
  Alt-Tab type interface for this, rather than trying to remember bookmark names. For example,
  a command "switch" would put it into a mode where it's waiting for keys. An arrow key right or left
  would cycle through a set of previous locations, perhaps even open projects (but that would require
  a lot more changes). If you don't press anything for a second or so, it would just switch back and
- forth between the two most recent, like Alt-Tab.
+ forth between the two most recent, like Alt-Tab. I wonder if I could use a Ctrl-Tab key command
+ instead?
  
 TODO: I really want to be able to color things according to either status, or some tag, instead of
  category. Or, give the user the ability to do this. I mean, coloring by category is nice, but I'd rather
@@ -53,11 +72,6 @@ TODO: I really want to be able to color things according to either status, or so
  and statuses also get a color, which is applied to the actual text. In a GUI, categories might be
  able to get an icon, so this is close to what I want.
  
-TODO: Trying to find a document with an apostrophe in it's name
- doesn't work. This happens with any command when specifying it as a
- path, or when comparing the names themselves (for example, when used
- as a predicate for "after")
- 
 TODO: It would be nice if the command line would retain it's history between
 sessions, perhaps with a max limit, of course.
  
@@ -65,8 +79,6 @@ TODO: A Rename doesn't keep order. It should. But then, that would also
 mean we *would*, after all, have to maintain references as well.
  
 TODO: "Set" should allow a null value or undefined to delete a property value.
- 
-TODO: order should accept glob patterns for before and after predicates.
  
 TODO: Now that I've got selectors, updators are useful too, for mass
  update of fields using list (or perhaps a separate, similar command, like `update`)
@@ -106,11 +118,6 @@ TODO: Another useful tool:
  (If mru is used within the repl already, it will just list the files or 
  open the project, obviously)
  
-TODO: Convert stew core, and stew cli, to work with Promises instead
- of callbacks (and also replace the "AsynchronousCommand" with them. 
- If it's thorough enough, it should make a lot of the callback stuff 
- less painful.
- 
 TODO: Finish implementing the unimplemented commands.
  
 TODO: Work on a GUI. So far, I have a few options:
@@ -148,4 +155,9 @@ TODO: Work on a GUI. So far, I have a few options:
  the feature of being able to store whatever file types you want in this,
  and therefore make the editor optional.
 
-
+ -- 2014/12/11: I've done further research into possibilities here, 
+    written out in my notes elsewhere for a Markdown Editor. This can
+    be done with Qt, Java, FreePascal/Lazarus(!), Node-Webkit and Atom-Shell.
+    I'm going to see which one's the easiest to work with and produces
+    the best stuff with WordBird. Once that's done, I can get back to
+    considering the GUI here.
