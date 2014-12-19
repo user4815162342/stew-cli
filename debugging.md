@@ -9,22 +9,21 @@ Instead, install node-inspector:
 
     sudo npm install node-inspector -g
     
-Once this is done, run node-inspector in a separate terminal, and open
-a browser to the correct page:
+Once this is done, run node-inspector in a separate terminal:
 
     node-inspector & 
-    
-(The URL may be different, look at the output from node-inspector).
     
 Then, run the app with "--debug" instead of "debug". This puts the application
 into remote debugging mode.
 
     node --debug index.js
     
-And, once it's running, in that other terminal, open chrome (this
-won't work in firefox):
+And, once it's running, in that other terminal, open chrome. This
+won't work in firefox:
  
     google-chrome "http://127.0.0.1:8080/debug?port=5858"
+    
+(The URL may be different, look at the output from node-inspector).
     
 Whenever you have to restart the debugging, you should be able to refresh
 that page. You know it's working if you get the javascript files showing
