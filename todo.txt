@@ -7,6 +7,8 @@ TODO: Convert stew core, and stew cli, to work with Promises instead
  -- this is probably best done from outside to in, using Q's denodeify
     tools (I think it has something like that), rather than changing
     to promises way down in SFMS and having to re-do everything from there.
+ -- once done, get rid of the asynchronous command thing, to clean up the
+    code a little bit, and possibly revisit the 'wait' function.
  
 TODO: It would be nice if the command line would retain it's history between
 sessions, perhaps with a max limit, of course.
