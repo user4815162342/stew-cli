@@ -8,25 +8,50 @@ TODO: Trying to find a document with an apostrophe in it's name
     had a title that had a single curly quotation mark instead of an
     apostrophe.
 
-== Mis-Features ==
- 
-TODO: The 'create' command doesn't really behave appropriately when it switches to the 
-document after creating:
-1) it doesn't indicate that it's 'creating' the document, but does indicate that the working
-document is changed, so it looks to me like create actually means move.
-2) Sometimes, and actually, quite often after working with this for a bit, I don't want to
-go to the document after creating it. Sometimes, I want to edit it, or just look at it and
-sigh.
- 
 == Features ==
  
-TODO: Need a "Help" task which lists all of the commands.
-
 TODO: Convert stew core, and stew cli, to work with Promises instead
  of callbacks (and also replace the "AsynchronousCommand" with them. 
  If it's thorough enough, it should make a lot of the callback stuff 
- less painful.
+ less painful and easier to maintain.
+ -- this is probably best done from outside to in, using Q's denodeify
+    tools (I think it has something like that), rather than changing
+    to promises way down in SFMS and having to re-do everything from there.
  
+TODO: It would be nice if the command line would retain it's history between
+sessions, perhaps with a max limit, of course.
+ 
+TODO: "Set" should allow a null value or undefined to delete a property value.
+ 
+TODO: Now that I've got selectors, updators are useful too, for mass
+ update of fields using list (or perhaps a separate, similar command, like `update`)
+
+TODO: List should at least have an option for indicating files that are directories. For
+example, a '+' sign next to it, or something. Or a Wingding folder symbol, if there is one.
+
+TODO: When printing out the synopsis in a list, it extends over the edge of the screen, instead of being
+wrapped around. I wonder if I should be putting some sort of "wrap style" on the synopsis when it's retrieved.
+
+TODO: When creating documents, it would be nice to be able to set some properties at the same time.
+With the creation of 'setters', mentioned elsewhere, this could be done easily.
+
+TODO: I really want to be able to color things according to either status, or some tag, instead of
+ category. Or, give the user the ability to do this. I mean, coloring by category is nice, but I'd rather
+ make it easier to find the items that haven't been done yet: My use of Task as a category to make things
+ red is a kludge. Yes, Tasks should be red, but the category of these docs should be Scene, not Task.
+ Therefore, I would rather be able to see scenes with a status of "To Do" be red instead. 
+ 
+ One option: categories get a little "bullet" next to them, which is printed in the color it should be,
+ and statuses also get a color, which is applied to the actual text. In a GUI, categories might be
+ able to get an icon, so this is close to what I want.
+ 
+TODO: A Rename doesn't keep order. It should. But then, that would also
+mean we *would*, after all, have to maintain references as well.
+ 
+== New Commands and Data Structures ===
+ 
+TODO: Need a "Help" task which lists all of the commands.
+
 TODO: Need a command to synchronize the current working directory with the current working document, so
 that I can use the js shell file operations on the project. This might be something that's done
 automatically when you change the working doc... the only problem is I can only change to the directory
@@ -45,15 +70,6 @@ be possible to add a task to multiple files based on tags or something else.
 according to priority and due date.
 - complete task: marks a task as completed, possibly with a reason.
 
-TODO: List should at least have an option for indicating files that are directories. For
-example, a '+' sign next to it, or something. Or a Wingding folder symbol, if there is one.
-
-TODO: When printing out the synopsis in a list, it extends over the edge of the screen, instead of being
-wrapped around. I wonder if I should be putting some sort of "wrap style" on the synopsis when it's retrieved.
-
-TODO: When creating documents, it would be nice to be able to set some properties at the same time.
-With the creation of 'setters', mentioned elsewhere, this could be done easily.
- 
 TODO: Need to be able to store current document locations and return to them quickly. I'd like an
  Alt-Tab type interface for this, rather than trying to remember bookmark names. For example,
  a command "switch" would put it into a mode where it's waiting for keys. An arrow key right or left
@@ -61,27 +77,6 @@ TODO: Need to be able to store current document locations and return to them qui
  a lot more changes). If you don't press anything for a second or so, it would just switch back and
  forth between the two most recent, like Alt-Tab. I wonder if I could use a Ctrl-Tab key command
  instead?
- 
-TODO: I really want to be able to color things according to either status, or some tag, instead of
- category. Or, give the user the ability to do this. I mean, coloring by category is nice, but I'd rather
- make it easier to find the items that haven't been done yet: My use of Task as a category to make things
- red is a kludge. Yes, Tasks should be red, but the category of these docs should be Scene, not Task.
- Therefore, I would rather be able to see scenes with a status of "To Do" be red instead. 
- 
- One option: categories get a little "bullet" next to them, which is printed in the color it should be,
- and statuses also get a color, which is applied to the actual text. In a GUI, categories might be
- able to get an icon, so this is close to what I want.
- 
-TODO: It would be nice if the command line would retain it's history between
-sessions, perhaps with a max limit, of course.
- 
-TODO: A Rename doesn't keep order. It should. But then, that would also
-mean we *would*, after all, have to maintain references as well.
- 
-TODO: "Set" should allow a null value or undefined to delete a property value.
- 
-TODO: Now that I've got selectors, updators are useful too, for mass
- update of fields using list (or perhaps a separate, similar command, like `update`)
  
 TODO: Need a mechanism to make it easy to send a certain set of pieces
  (by category, or tag, for example) to a cloud service, and pull them
@@ -119,6 +114,8 @@ TODO: Another useful tool:
  open the project, obviously)
  
 TODO: Finish implementing the unimplemented commands.
+
+== GUI ==
  
 TODO: Work on a GUI. So far, I have a few options:
  - an "ncurses"-like interface -- which might or might not be easier
