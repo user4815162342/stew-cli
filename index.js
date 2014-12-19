@@ -1,5 +1,6 @@
 #!/usr/bin/node
 var os = require('os');
+var Q = require("q");
 var writer = require("./lib/writer");
 
  
@@ -76,6 +77,8 @@ var writer = require("./lib/writer");
                          outputResult(data);
                      }
                  });
+             } else if (Q.isPromise(result)) {
+                 result.then(outputResult,outputError);
              } else {
                  outputResult(result);
              }

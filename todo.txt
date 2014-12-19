@@ -1,13 +1,3 @@
-== Bugs ==
-
-TODO: Trying to find a document with an apostrophe in it's name
- doesn't work. This happens with any command when specifying it as a
- path, or when comparing the names themselves (for example, when used
- as a predicate for "after"). 
- -- Can't confirm this issue. It seems to work fine now. I wonder if I
-    had a title that had a single curly quotation mark instead of an
-    apostrophe.
-
 == Features ==
  
 TODO: Convert stew core, and stew cli, to work with Promises instead
@@ -114,6 +104,16 @@ TODO: Another useful tool:
  open the project, obviously)
  
 TODO: Finish implementing the unimplemented commands.
+
+== Unreproducible Bugs ==
+
+TODO: Trying to find a document with an apostrophe in it's name
+ doesn't work. This happens with any command when specifying it as a
+ path, or when comparing the names themselves (for example, when used
+ as a predicate for "after"). 
+ -- Can't confirm this issue. It seems to work fine now. I wonder if I
+    had a title that had a single curly quotation mark instead of an
+    apostrophe.
 
 == GUI ==
  
