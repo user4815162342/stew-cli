@@ -69,9 +69,7 @@ var writer = require("./lib/writer");
          } else {
              var command = engine.loadCommand(args[0]);
              var result = command.apply(null,args.slice(1));
-             if (result instanceof engine.AsynchronousCall) {
-                 result.runPromise(outputResult,outputError);
-             } else if (Q.isPromise(result)) {
+             if (Q.isPromise(result)) {
                  result.then(outputResult,outputError);
              } else {
                  outputResult(result);

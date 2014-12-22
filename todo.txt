@@ -14,17 +14,17 @@ value is resolved against the current directory, even if we're moving a
 doc outside of that directory. I think it should probably resolve against
 the parent directory of the file whose order is being changed.
 
+TODO: When calling a command that returns an empty standard object (such
+as "get" on a doc that has no value for the properties), "[Object]" is 
+returned instead of something else that indicates an empty "<object>".
+
 == Features ==
  
-TODO: Convert stew core, and stew cli, to work with Promises instead
- of callbacks (and also replace the "AsynchronousCommand" with them. 
- If it's thorough enough, it should make a lot of the callback stuff 
- less painful and easier to maintain.
+TODO: Convert stew core, and SFMS, to work with Promises instead
+ of callbacks.
  -- this is probably best done from outside to in, using Q's denodeify
     tools (I think it has something like that), rather than changing
     to promises way down in SFMS and having to re-do everything from there.
- -- once done, get rid of the asynchronous command thing, to clean up the
-    code a little bit, and possibly revisit the 'wait' function.
  
 TODO: It would be nice if the command line would retain it's history between
 sessions, perhaps with a max limit, of course.
@@ -120,6 +120,20 @@ TODO: Another useful tool:
  would open the repl with the project whose basename is the specified string. 
  (If mru is used within the repl already, it will just list the files or 
  open the project, obviously)
+ 
+TODO: Not really a new command, but a new way of handling commands.
+Certain commands currently take a "doc" object as the first parameter,
+which is optional unless there is no way to figure out by the parameter
+types, making it a little tough. What if:
+- Whenever the current working document is changed, the context is changed.
+The documents in the current context become "commands". Specifying a
+document name followed by a command causes the command to be called with
+the document as the first parameter. Specifying the command alone causes 
+the command to be called with the current document as the parameter. 
+- Now, I don't want to have to scan the whole directory with every 
+directory switch, so that I can add in subdirs and parent dirs, so it's 
+possible that this might require some pre-parsing before parsing as JavaScript.
+Or, maybe this is better done with another syntax more like a shell.
  
 TODO: Finish implementing the unimplemented commands.
 
