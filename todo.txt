@@ -1,3 +1,19 @@
+== Bugs ==
+
+TODO: When calling order after/before with a relativeTo that isn't ordered,
+the index doesn't actually change relative to the other doc, i think it
+just moved the doc to the end. Instead, it should really report an error
+indicating that the relative document does not exist.
+
+TODO: When calling list on the root directory of a project, docs are
+not listed in the order of their index. I suspect it's looking in the wrong
+place to get the data.
+
+TODO: When calling order after/before with a relativeTo doc, the relativeTo
+value is resolved against the current directory, even if we're moving a
+doc outside of that directory. I think it should probably resolve against
+the parent directory of the file whose order is being changed.
+
 == Features ==
  
 TODO: Convert stew core, and stew cli, to work with Promises instead
