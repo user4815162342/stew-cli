@@ -60,11 +60,6 @@ mean we *would*, after all, have to maintain references as well.
  
 TODO: Need a "Help" task which lists all of the commands.
 
-TODO: Need a command to synchronize the current working directory with the current working document, so
-that I can use the js shell file operations on the project. This might be something that's done
-automatically when you change the working doc... the only problem is I can only change to the directory
-if the doc *is* a directory.
-
 TODO: Need to handle User Tasks. Basically, my first instinct is that these are
 stored in an attachment labeled _tasks.txt, probably using something like a
 todo.txt format. That way, tasks can be applied to specific documents, rather

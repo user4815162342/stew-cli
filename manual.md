@@ -169,6 +169,12 @@ to edit when the current working document is the root of the project.
     commands will generally accept string patterns, which will be compiled
     into a form that will match much more efficiently. Using this function
     is not recommended.
+    
+-   `syncd`: This attempts to synchronize the current working directory 
+    of the operating system to the disk path of the current working stew 
+    document. This makes it easier to use of the jsshell commands on 
+    the real files behind stew. If the current stew document is not a 
+    folder, the working directory will be set to it's parent.
 
 -   `clear`: The project state maintains a cache of document properties. Use
     this command to clear that cache on the current project, in cases where an
