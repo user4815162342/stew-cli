@@ -24,6 +24,13 @@ in the properties.json file, but it did not change the color with the list
 command, and when listing the category as well, the category was the default
 category. Renaming the files so that the ending dots weren't there fixed this.
 
+TODO: When formatting the content of an empty object or array for output,
+it comes out as [object Object], or something like that. It should come out
+with "<none>" or something like that.
+
+TODO: When formatting an object in a table, and the object is in the second column,
+the column does not seem to be indented appropriately.
+
 == Features ==
  
 TODO: Convert stew core, and SFMS, to work with Promises instead
@@ -31,6 +38,8 @@ TODO: Convert stew core, and SFMS, to work with Promises instead
  -- this is probably best done from outside to in, using Q's denodeify
     tools (I think it has something like that), rather than changing
     to promises way down in SFMS and having to re-do everything from there.
+    
+TODO: The properties in the core should have a way of listing all user property names.
  
 TODO: It would be nice if the command line would retain it's history between
 sessions, perhaps with a max limit, of course.
