@@ -31,6 +31,10 @@ with "<none>" or something like that.
 TODO: When formatting an object in a table, and the object is in the second column,
 the column does not seem to be indented appropriately.
 
+TODO: When you rename the current document itself, the current working document
+does not change, and you get into a situation where you can't do anything because
+it keeps saying "Attempted to get a document that doesn't exist"
+
 == Features ==
  
 TODO: Convert stew core, and SFMS, to work with Promises instead
@@ -72,6 +76,43 @@ TODO: I really want to be able to color things according to either status, or so
  
 TODO: A Rename doesn't keep order. It should. But then, that would also
 mean we *would*, after all, have to maintain references as well.
+
+TODO: A new "command syntax". Although the JavaScript thing is convenient
+in allowing for more complex code, I rarely use it, and it actually makes
+things more complex for what I want it for.
+
+Basically, it would be a syntax similar in nature to a shell syntax, wherein
+everything is whitespace separated arguments. An argument can
+be a number, an identifier (text with no quotes and no spaces) or a quoted
+string (quotes surrounding text with any amount of whitespace and other
+special characters). Also, the "simple expression" syntax should be a subset
+of the syntax, so it can be converted easily. I might also add some sort
+of script resolving syntax, such as "{...}" to allow javascript evaluation.
+
+Each command is therefore turned into a list of arguments, either string,
+identifier, or number. The first and, often, second ones are the most a
+important in looking up an appropriate action.
+
+If the first argument is an identifier, an attempt will be made to resolve
+it first to a command, then to a document relative to the current if no
+command is found. If the first argument is a quoted string, it will try
+to resolve to a document first, then a command if no such document is found.
+If it can't be resolved to either, an error will be reported.
+
+If the first argument is resolved to a command, then:
+- If the command is marked as a "document" command, the command will be
+  called with the current working document as the first argument, and any
+  remaining arguments from the command line following that.
+- If the command is marked as "non-document", meaning it doesn't require
+  a document to run against, the command will simply be passed all of the
+  remaining arguments.
+  
+If the first argument is resolved to a document, then an attempt will be
+made to resolve the second argument to a command. If a command is found,
+and that command is a "document" command, the command will be called with
+the specified document as the first argument, and the remaining arguments
+following that. If no command is found, an error will be reported. However,
+if no second argument was passed, a "goto" command is assumed.
 
 == New Commands and Data Structures ===
  

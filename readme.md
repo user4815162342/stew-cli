@@ -56,6 +56,7 @@ should install it locally in your project.
 
 `npm install --save stew-cli`
 
+You should then be able to run stew commands from the command line.
 
 `stew version`
 
