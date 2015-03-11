@@ -16,7 +16,7 @@
     "path-extra": "~0.2",
     "q": "^1.1.2",
     "shelljs": "~0.3",
-    "stew-core": "user4815162342/stew-core",
+    "stew-core": "^0.0",
     "supports-color": "^1.1.0"
   },
   "scripts": {

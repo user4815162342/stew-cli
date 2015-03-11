@@ -446,9 +446,9 @@ These commands help manage documents.
 -   `create [docpath] <string>`: Creates a new document relative to the current
     working document.
 
--   `move <docpath> <docpath> [string]`: Moves the document specified by the
-    first argument into the document specified by the second. Optionally, it
-    will also be renamed with the third argument.
+-   `move [<docpath>] <docpath>`: Moves the document specified by the
+    second argument into the document specified by the first. If only one
+    document is specified, it will move that document into the current one.
     
 -   `rename <docpath> <string>`: Renames the base of the document specified by
     the first document to the name specified by the second.
