@@ -1,5 +1,23 @@
 == Bugs ==
 
+TODO: !!!Major!!! If you name something a document with a period, and then give it
+subdocuments, its shows up in two entries in a list. For example: 
+1. create("I. The Call")
+2. create("I. The Call/Home")
+3. list()
+The result is:
+I
+I. The Call
+
+Also, does weird things when you call edit, and rename. Just try:
+edit("I. The Call") 
+rename("I. The Call","I The Call") 
+and see what happens.
+
+Basically, the whole file extension thing isn't working with all things.
+This could also mean problems with underscores. The answer might be to
+make '.' and '_' into bad name characters, but that might also be overkill.
+
 TODO: When calling order after/before with a relativeTo that isn't ordered,
 the index doesn't actually change relative to the other doc, i think it
 just moved the doc to the end. Instead, it should really report an error
@@ -37,11 +55,7 @@ it keeps saying "Attempted to get a document that doesn't exist"
 
 == Features ==
  
-TODO: Convert stew core, and SFMS, to work with Promises instead
- of callbacks.
- -- this is probably best done from outside to in, using Q's denodeify
-    tools (I think it has something like that), rather than changing
-    to promises way down in SFMS and having to re-do everything from there.
+TODO: Convert SFMS, to work with Promises instead of callbacks.
     
 TODO: The properties in the core should have a way of listing all user property names.
  
@@ -205,6 +219,79 @@ possible that this might require some pre-parsing before parsing as JavaScript.
 Or, maybe this is better done with another syntax more like a shell.
  
 TODO: Finish implementing the unimplemented commands.
+
+TODO: Publishing:
+
+pandoc can combine files, which would be great, if it read from all of
+the possible formats I can think of. It doesn't allow ODT as an input format,
+but I can just add in a preprocessor for that stuff. Anyway, here goes:
+- "publish" requires pandoc to be installed on the system. (A call to
+"pandoc -v" can confirm it's existence, and at some point help us figure
+out whether certain things need to be done first based on version number)
+- It calls a 'publish' function in stew-core, because that's really where
+this needs to be. This is where the work is done.
+- The publish command requires a parameter specifying the output type for pandoc.
+- The list of documents to be published will be the same
+as calling listDocs with a "recurse(publish)" filter on the document on 
+which publish is called, except it will also include itself as a document.
+- if a document to be published is an .odt file, then "libreoffice" is required
+as well, because pandoc can not open ODT yet. (A call to "libreoffice --version" 
+can confirm it's existence, and help with capabilities in the future).
+- Some new properties on the documents as well:
+  - title: Sometimes, the "name" of the document isn't the same as the title, probably because of filename issues.
+- And some new properties on "categories":
+  - publishTitle: Specifies whether the 'title' of the specified object should be published.
+  - titleLevel: Specifies the "level" of the category when published. For example, "book" might be level 1, "chapter" level 2, etc.
+  - titlePrefix: Specifies the text to appear before the prefix to be included (will appear before the 'number'. For example, "Book", "Chapter". Also, certain substitution parameters can be in cluded:
+    - %R: insert a capital roman numberal here, according to the number of other items in the category in the published document.
+    - %N: insert an arabic numeral here, according to the numbers of the other items in the category in the published document.
+    - %A: insert a capital alphabetic letter here, according to the numbers of the other items in the category in the published document.
+  - publishTitle: specifies whether the title should be "published" when an item of this category is published.
+  - publishBreakBefore: specifies whether a page break should occur before the item when published.
+  - publishBreakAfter: specifies whether a page break should occur after the item when publisshed.
+  - publishMarkerBetween: specifies whether a section marker should occur between two items of the same category.
+- Okay, so here goes the process:
+  - build a list of documents to be published. this is done as mentioned above.
+  - create a "numbers" object which will contain category names mapped to numbers.
+  - create a "files" list which will contain paths of files to be put together with pandoc.
+  - With each document:
+    - look at it's category. 
+      - if the category says "publishTitle" is true, then:
+        - create a temporary "before" file containing the 'title' of the document from it's properties, or the basename of the 
+          document if that doesn't exist. The "text" file is going to be in markdown, html or possibly latex.
+        - if the category has a titleLevel, then the title's level is specified according to that, otherwise it will get a level of 1.
+        - if the category has a titlePrefex, then that has to be calculated (including the substitution parameter) and applied to
+        the text file. If the category is not mentioned in the "numbers" object, give it a number of 1, and set the property on the numbers object to 2. Otherwise, give it the number from the "numbers" object, and increment that. Translate the number
+        according to the substitution variable provided.
+      - if the category says "publishBreakBefore" is true, then do whatever it takes to put a page break into the "before" file. I have to play around with this, if the text file is in latex format, I might be able to insert the page break there and get it to convert to ODT or whatever.
+      - if the category says "publishMarkerBetween", and the previous item processed was the same category, create a "between" text file indicating that a horizontal rule, or something else (I have to figure out what to do there).
+      - if the category says publishBreakAfter, create an "after" file for after, see publishBreakBefore a little above.
+    - if the file is an "ODT" file, use libreoffice --headless to convert it to HTML first, because pandoc can't read ODT.
+        See: http://ask.libreoffice.org/en/question/1686/how-to-not-connect-to-a-running-instance/ for how to do it to ensure
+        that this will work whether libreoffice is running or not already. NOTE: This will change if pandoc ever supports ODT
+        input.
+    - Now, add the files in order to a list of files to process:
+        - the "between" file if it exists.
+        - the "before" file if it exists.
+        - the document file (either the original file, or the HTML file converted from ODT) 
+        - the "after" file if it exists.
+  - Now, build a pandoc command line. Parameters are ["-s","-o",outputfileName].concat(files array to be process). And run it.      
+
+
+    - If the item's category says "publishTitle" is true, then:
+      - create a "title" file, based on the 
+    - publishHeading causes a markdown, html, or maybe latex document to be created which contains a simple "heading" block with the specified heading text at the specified level (or 1 if no level provided).
+    - publishPageBreakAfter -- I'm not exactly certain how to do this, but very likely this has to be a latex document. I just
+      have to figure out if 
+
+
+
+
+given substitution parameters:
+  - '%I' gets the full path of the input file.
+  - '%D' gets the full path to the output directory.
+  and '%', where '%I' is the input file and '%O' is the
+output file. If %O
 
 == Unreproducible Bugs ==
 

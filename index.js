@@ -69,7 +69,9 @@ var writer = require("./lib/writer");
          } else {
              var command = engine.loadCommand(args[0]);
              var result = command.apply(null,args.slice(1));
-             if (Q.isPromise(result)) {
+             // Have to check alike, because the Promise object might
+             // be returned from another module.
+             if (Q.isPromiseAlike(result)) {
                  result.then(outputResult,outputError);
              } else {
                  outputResult(result);
