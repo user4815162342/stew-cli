@@ -278,20 +278,6 @@ can confirm it's existence, and help with capabilities in the future).
   - Now, build a pandoc command line. Parameters are ["-s","-o",outputfileName].concat(files array to be process). And run it.      
 
 
-    - If the item's category says "publishTitle" is true, then:
-      - create a "title" file, based on the 
-    - publishHeading causes a markdown, html, or maybe latex document to be created which contains a simple "heading" block with the specified heading text at the specified level (or 1 if no level provided).
-    - publishPageBreakAfter -- I'm not exactly certain how to do this, but very likely this has to be a latex document. I just
-      have to figure out if 
-
-
-
-
-given substitution parameters:
-  - '%I' gets the full path of the input file.
-  - '%D' gets the full path to the output directory.
-  and '%', where '%I' is the input file and '%O' is the
-output file. If %O
 
 == Unreproducible Bugs ==
 
