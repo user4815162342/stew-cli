@@ -504,21 +504,30 @@ These commands help manage documents.
 
 -   `graph references [docpath] <string>`: Creates a graphml file out of the
     specified document, or all documents in the project, with connections
-    between documents that reference each other.   -   `graph tree [docpath]
+    between documents that reference each other.   
+-   `graph tree [docpath]
     <string>`: Creates a graphml file out of the specified document, or all
     documents in the project, with connections between documents that follow or
     precede each other. In the graph, folder documents are considered to precede
     their contents, and to follow the contents of preceding folder documents.
     These relationships are maintained using the "port" elements in the graphml
     document. There is no equivalent applyGraph for this, as such a command
-    would involve moving files around in directories.   -   `applyGraph
+    would involve moving files around in directories.   
+-   `applyGraph
     references <string>`: Reads a reference graph and applies it's changes to
     the references properties of the documents. All references will be
     overwritten, so backups are suggested before you try this for the first few
-    times.  -   `tree [docpath] <string>`: Creates a text file which visualizes
+    times.  
+-   `tree [docpath] <string>`: Creates a text file which visualizes
     the file tree of the project or the specified document, including  synopsis
-    and file tags.   -   `publish [docpath] <string>`: Creates a publishable
-    directory of files.   Iterates recursively through all of the documents in
-    the specified  document, or in the project. If the document has a publish
-    property  set to true, the document will be copied to the directory with a
-    similar name, but with a prefix indicating the order it is to be  listed in.
+    and file tags.   
+-   `publish [<docpath> <string> <boolean>]`: Combines and compiles publishable
+    files, including the specified document, into a single file. The second parameter
+    is the location of the output file. By default, it is created in a 'published'
+    directory, with a timestamp. If you wish to specify the format of the output,
+    you must specify an output filename, otherwise it uses the `defaultDocExtension`
+    property of stew. There are a number of configuration parameters which
+    allow you to specify whether and how to include a title for documents, based
+    on their category. This command requires `pandoc` to be installed on
+    your system, and `libreoffice` if any of the documents to be published
+    are word processor files.
