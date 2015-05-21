@@ -1,6 +1,6 @@
 == Bugs ==
 
-TODO: !!!Major!!! If you name something a document with a period, and then give it
+TODO: If you name something a document with a period, and then give it
 subdocuments, its shows up in two entries in a list. For example: 
 1. create("I. The Call")
 2. create("I. The Call/Home")
@@ -17,6 +17,10 @@ and see what happens.
 Basically, the whole file extension thing isn't working with all things.
 This could also mean problems with underscores. The answer might be to
 make '.' and '_' into bad name characters, but that might also be overkill.
+
+TODO: Doing a call to core/docs.matchDocs with a GLOBSTAR will come up
+with an error "'q' is not defined". This has been fixed, just not published
+to the server yet.
 
 TODO: When calling order after/before with a relativeTo that isn't ordered,
 the index doesn't actually change relative to the other doc, i think it
@@ -55,14 +59,30 @@ it keeps saying "Attempted to get a document that doesn't exist"
 
 == Features ==
  
-TODO: Convert SFMS, to work with Promises instead of callbacks.
+TODO: Convert SFMS to work with Promises instead of callbacks.
+
+TODO: 'order' should be able to "pack" the index if no parameters are passed.
+Meaning, it will look at the current index and compare it to the list of
+docs that are currently inside, and if any aren't actually there, the
+missing documents will be removed from the index. Right now, numeric
+order doesn't work when there's huge gaps in the index caused by renaming
+lots of files.
     
-TODO: The properties in the core should have a way of listing all user property names.
+TODO: The properties in the core should have a way of listing all user property names. 
+This will allow more flexible tools, and less changes when a new property
+is added. Although, this will require some sort of "type" reflection, 
+so the tools also know what to do with it. This isn't *too* difficult, but 
+it's getting a little more complicated than it should be.
+
+TODO: The properties in the core should als have a way of listing all property functions 
+(since the functions are placed on a prototype). This will make a 'config' command
+easier, since I don't have to create a separate command for each property.
  
 TODO: It would be nice if the command line would retain it's history between
 sessions, perhaps with a max limit, of course.
  
-TODO: "Set" should allow a null value or undefined to delete a property value.
+TODO: "Set" should allow a null value or undefined to delete a property value. I
+think it's doing this, but I'm not entirely sure and it needs to be tested.
  
 TODO: Now that I've got selectors, updators are useful too, for mass
  update of fields using list (or perhaps a separate, similar command, like `update`)
@@ -88,8 +108,11 @@ TODO: I really want to be able to color things according to either status, or so
  and statuses also get a color, which is applied to the actual text. In a GUI, categories might be
  able to get an icon, so this is close to what I want.
  
+ In the process of changing this, the 'status' property should be able to read in the old
+ version, but save in the new.
+ 
 TODO: A Rename doesn't keep order. It should. But then, that would also
-mean we *would*, after all, have to maintain references as well.
+mean we *would*, after all, have to maintain references as well, to be consistent.
 
 TODO: A new "command syntax". Although the JavaScript thing is convenient
 in allowing for more complex code, I rarely use it, and it actually makes
@@ -273,3 +296,31 @@ TODO: Work on a GUI. So far, I have a few options:
     I'm going to see which one's the easiest to work with and produces
     the best stuff with WordBird. Once that's done, I can get back to
     considering the GUI here.
+    
+-- 2015/03/23: updates on cross-platform technology:
+- It looks like a Markdown app written in FreePascal with Lazarus may
+be ridiculously easy (knock on wood).
+- There are ways to get Free Pascal to compile for android, but it requires
+a lot of technical setup, and I assume that the Lazarus components available
+will not be the same, requiring a separate code-base anyway.
+- There is a lot of interest for node-webkit on android, but probably
+little reason to believe the developers will do it.
+- There are "phonegap for desktop" attempts which would make use of node-webkit to
+handle the cordova libraries. This might be a better alternative, but
+I'm not sure how well they're supported, and it would still hurt the
+beautiful require module system that node uses here.
+
+-- 2015/03/23: Update on a GUI interface:
+- A window with two panes: 
+  - Left Pane: "Explorer"
+    - would be a treeview, only getting file system data when node is expanded. 
+    - A "filter" textbox and button at the top to show only content which matches certain filters.
+    - A button would expand this whole left pane and turn it into a grid, showing
+      properties of each document (user-customizable what properties are shown). 
+      - It's even possible that the properties could be "edited" in the grid.
+  - Right Pane: 
+    - Document name, and possibly last modified time.
+    - Synopsis: A text box allowing review/editing of synopsis.
+    - Properties: A "Treeview" of properties for the currently selected document, with some editing capabilities.
+    - Contents: A list of the contents of the file, if it's a folder.
+    - Edit Buttons: Buttons to edit notes, edit primary, edit thumbnail, backup. Possibly more.
