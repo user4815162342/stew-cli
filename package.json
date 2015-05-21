@@ -10,13 +10,13 @@
   "dependencies": {
     "ansi-styles": "~1.1.0",
     "mime": "~1.2",
-    "minimatch": "~1.0",
+    "minimatch": "~2.0",
     "mkdirp": "~0.5",
     "opener": "~1.4",
     "path-extra": "~0.2",
     "q": "^1.1.2",
     "shelljs": "~0.3",
-    "stew-core": "^0.0",
+    "stew-core": ">=0.0.12",
     "supports-color": "^1.1.0"
   },
   "scripts": {
