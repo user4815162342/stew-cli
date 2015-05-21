@@ -1,3 +1,5 @@
+*[A GUI version of stew is now available.](https://github.com/user4815162342/stew-gui) This command line version is not deprecated, however, I am focusing on the GUI for now, and any new features will probably show up there first.*
+
 Stew
 ====
 
