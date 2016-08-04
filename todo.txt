@@ -59,6 +59,11 @@ it keeps saying "Attempted to get a document that doesn't exist"
 
 == Features ==
  
+TODO: For publishing, create a 'prepublish' directory which can store the
+documents prior to publishing, and check file dates against them. That way
+we don't have to convert the libreoffice files if the documents have
+already been converted.
+
 TODO: Convert SFMS to work with Promises instead of callbacks.
 
 TODO: 'order' should be able to "pack" the index if no parameters are passed.
