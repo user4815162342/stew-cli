@@ -531,3 +531,13 @@ These commands help manage documents.
     on their category. This command requires `pandoc` to be installed on
     your system, and `libreoffice` if any of the documents to be published
     are word processor files.
+-   `words [<docpath> <boolean>]`: Counts the words in the primary document
+     for this document and all child documents that are marked as publishable.
+     The second parameter allows for a dry run, as with `publish`. The
+     words are counted after using the techniques used in `publish` to convert
+     the documents to plain text. The word counts may differ from the
+     counts of the published document, at the very least due to 'chapter'
+     headings added during publishing. Otherwise, the counting seems to
+     be fairly close to how libreoffice counts it. This command requires
+     `libreoffice` to be installed if any of the documents to be published
+     are word processor files.
