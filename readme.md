@@ -1,3 +1,7 @@
+*If there is anyone who is following this project: I am no longer maintaining this project, and I was alerted to a security vulnerability in one of the requirements, so I do not recommend using it.*
+
+*I no longer use writing organizers for myself, I have found better ways, and stew was a stepping stone towards that.*
+
 *[A GUI version of stew is now available.](https://github.com/user4815162342/stew-gui) This command line version is not deprecated, however, I am focusing on the GUI for now, and any new features will probably show up there first.*
 
 Stew
